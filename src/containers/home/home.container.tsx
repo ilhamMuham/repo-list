@@ -10,8 +10,12 @@ import {
 const Home = () => {
     const dispatch = useDispatch()
     const [data, setData] = useState<any[]>([])
+    const [login, setLogin] = useState<boolean>(false)
+    const [logout, setLogout] = useState<boolean>(false)
 
     const alert = async () => {
+        setLogin(false)
+        setLogout(false)
       
       const { value : username } = await Swal.fire({
         title: 'Enter your github username',
@@ -29,8 +33,10 @@ const Home = () => {
                 text: 'username not found',
             })
             setData([])
+            setLogin(true)
           } else {
             setData(data)
+            setLogout(true)
           }
       } catch (err) {
         return err
@@ -50,6 +56,15 @@ const Home = () => {
 
     return (
         <div>
+            {login && <button onClick={alert}>Log In</button>}
+            {logout && <button onClick={ async ()=> {
+                await dispatch({
+                    type: GET_DETAIL,
+                    payload: []
+                })
+                setData([])
+                alert()
+            }}>Log Out</button>}
             {
                 data.map((e,i)=> {
                     return (
