@@ -1,14 +1,14 @@
-import { GET_LIST } from '../../actions'
+import { GET_DETAIL } from '../../actions'
 const initialState = {
-    dataList: [],
+    dataDetail: [],
 }
 
 const listReducer = (state = { ...initialState }, action: any) => {
   switch (action.type) {
-  case GET_LIST: {
+  case GET_DETAIL: {
     return {
       ...state,
-      dataList : action.payload,
+      dataDetail : action.payload,
       dataCount : action.payload.length
     }}
   default: {

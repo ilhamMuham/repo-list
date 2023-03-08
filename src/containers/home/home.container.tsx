@@ -1,7 +1,8 @@
+import Link from 'next/link';
 import Swal from 'sweetalert2'
 import { useEffect, useState } from 'react'
-import { GET_LIST } from '../../redux/actions'
-import { useSelector, useDispatch } from 'react-redux'
+import { GET_DETAIL } from '../../redux/actions'
+import { useDispatch } from 'react-redux'
 import {
     HomeAPI
 } from '../../api'
@@ -9,9 +10,6 @@ import {
 const Home = () => {
     const dispatch = useDispatch()
     const [data, setData] = useState<any[]>([])
-    const { dataList } = useSelector((state: any) => state.listReducer)
-
-    console.log('dataList : ',dataList)
 
     const alert = async () => {
       
@@ -32,27 +30,38 @@ const Home = () => {
             })
             setData([])
           } else {
-            await dispatch({
-                type: GET_LIST,
-                payload: data
-            })
             setData(data)
           }
       } catch (err) {
         return err
       }
     }
+    
+    const clickDetail = async(e : any) => {
+         await dispatch({
+            type: GET_DETAIL,
+            payload: e
+        })
+    }
+
     useEffect(()=> {
         alert()
     },[])
 
     return (
         <div>
-
             {
                 data.map((e,i)=> {
                     return (
-                        <div key={i}>{e.full_name}</div>
+                        <div key={i} style={{
+                            boxShadow: '0 4px 8px 0 rgba(0,0,0,0.2)',
+                            width: '30%',
+                            height: '120%',
+                            padding : '10px',
+                            margin: '20px'
+                        }}>
+                            <Link href="/detail" style={{ cursor: 'pointer'}} onClick={()=>clickDetail(e)} key={i}>{e.name}</Link>
+                        </div>
                     )
                 })
             }

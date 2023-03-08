@@ -1,3 +1,3 @@
-import { GET_LIST } from './list.action'
+import { GET_DETAIL } from './list.action'
 
-export { GET_LIST }
+export { GET_DETAIL }

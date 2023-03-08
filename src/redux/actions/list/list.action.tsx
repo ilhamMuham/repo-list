@@ -1,3 +1,3 @@
-const GET_LIST = 'GET_LIST'
+const GET_DETAIL = 'GET_DETAIL'
 
-export { GET_LIST }
+export { GET_DETAIL }
