@@ -8,8 +8,8 @@ const listReducer = (state = { ...initialState }, action: any) => {
   case GET_LIST: {
     return {
       ...state,
-      dataList : action.payload.data,
-      dataCount : action.payload.count
+      dataList : action.payload,
+      dataCount : action.payload.length
     }}
   default: {
     return state
